@@ -10,7 +10,13 @@ export class LoginController {
   ) { }
 
   @post('/login')
-  async sendUserInfo(@requestBody() username: string, password: string) {
-    return true;
+  async sendUserInfo(@requestBody() login: any) {
+    let allUsers = await this.userRepo.find();
+    allUsers.forEach(element => {
+        if(element.email == login.email && element.password == login.password) {
+            return true;
+        }
+    });
+    return false;
   }
 }

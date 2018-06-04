@@ -1,8 +1,9 @@
 import { repository } from "@loopback/repository";
 import { UserRepository } from "../repositories/user.repository";
-import { post, get, requestBody } from "@loopback/rest";
-import { User} from "../models/user";
+import { post, get, requestBody, param } from "@loopback/rest";
+import { User } from "../models/user";
 import { request } from "http";
+
 
 export class UsersController {
 
@@ -18,11 +19,17 @@ export class UsersController {
 
   @get('/users')
   async getAllUsersByID(): Promise<Array<User>> {
-      let allUsers = await this.userRepo.find();
-      var allUserIds = new Array();
-      allUsers.forEach(element => {
-        allUserIds.push(element.getId());
-      });
-      return allUserIds;
-    }
+    let allUsers = await this.userRepo.find();
+    var allUserIds = new Array();
+    allUsers.forEach(element => {
+      allUserIds.push(element.name + " " + element.getId());
+    });
+    return allUserIds;
+  }
+
+
+  @get('/users/{id}')
+  async getUserByID(@param.path.number('id') id: number): Promise<User> {
+    return await this.userRepo.findById(id);
+  }
 }

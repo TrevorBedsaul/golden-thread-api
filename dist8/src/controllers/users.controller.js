@@ -24,12 +24,15 @@ let UsersController = class UsersController {
         return await this.userRepo.find();
     }
     async getAllUsersByID() {
-        let allUser = await this.userRepo.find();
-        var userIds = new Array();
-        allUser.forEach(element => {
-            userIds.push(element.getId());
+        let allUsers = await this.userRepo.find();
+        var allUserIds = new Array();
+        allUsers.forEach(element => {
+            allUserIds.push(element.name + " " + element.getId());
         });
-        return userIds;
+        return allUserIds;
+    }
+    async getUserByID(id) {
+        return await this.userRepo.findById(id);
     }
 };
 __decorate([
@@ -44,6 +47,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "getAllUsersByID", null);
+__decorate([
+    rest_1.get('/users/{id}'),
+    __param(0, rest_1.param.path.number('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "getUserByID", null);
 UsersController = __decorate([
     __param(0, repository_1.repository(user_repository_1.UserRepository.name)),
     __metadata("design:paramtypes", [user_repository_1.UserRepository])

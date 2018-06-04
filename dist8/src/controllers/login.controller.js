@@ -19,15 +19,21 @@ let LoginController = class LoginController {
     constructor(userRepo) {
         this.userRepo = userRepo;
     }
-    async sendUserInfo(username, password) {
-        return true;
+    async sendUserInfo(login) {
+        let allUsers = await this.userRepo.find();
+        allUsers.forEach(element => {
+            if (element.email == login.email && element.password == login.password) {
+                return true;
+            }
+        });
+        return false;
     }
 };
 __decorate([
     rest_1.post('/login'),
     __param(0, rest_1.requestBody()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], LoginController.prototype, "sendUserInfo", null);
 LoginController = __decorate([

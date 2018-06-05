@@ -20,19 +20,15 @@ let UsersController = class UsersController {
         this.userRepo = userRepo;
     }
     async getAllUsers() {
-        let allUsers = await this.userRepo.find();
         return await this.userRepo.find();
     }
-    async getAllUsersByID() {
-        let allUsers = await this.userRepo.find();
-        var allUserIds = new Array();
-        allUsers.forEach(element => {
-            allUserIds.push(element.name + " " + element.getId());
-        });
-        return allUserIds;
-    }
     async getUserByID(id) {
-        return await this.userRepo.findById(id);
+        try {
+            return await this.userRepo.findById(id);
+        }
+        catch (_a) {
+            throw new rest_1.HttpErrors.Unauthorized('user does not exist');
+        }
     }
 };
 __decorate([
@@ -41,12 +37,6 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], UsersController.prototype, "getAllUsers", null);
-__decorate([
-    rest_1.get('/users'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", Promise)
-], UsersController.prototype, "getAllUsersByID", null);
 __decorate([
     rest_1.get('/users/{id}'),
     __param(0, rest_1.param.path.number('id')),

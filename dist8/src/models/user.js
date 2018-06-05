@@ -28,7 +28,14 @@ __decorate([
         required: true
     }),
     __metadata("design:type", String)
-], User.prototype, "name", void 0);
+], User.prototype, "firstname", void 0);
+__decorate([
+    repository_1.property({
+        type: 'string',
+        required: true
+    }),
+    __metadata("design:type", String)
+], User.prototype, "lastname", void 0);
 __decorate([
     repository_1.property({
         type: 'string',
@@ -44,7 +51,9 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 User = __decorate([
-    repository_1.model()
+    repository_1.model({
+        name: "user"
+    })
 ], User);
 exports.User = User;
 //# sourceMappingURL=user.js.map

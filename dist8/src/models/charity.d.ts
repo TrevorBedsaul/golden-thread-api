@@ -1,8 +1,8 @@
 import { Entity } from '@loopback/repository';
-export declare class Pizza extends Entity {
+export declare class Charity extends Entity {
     id?: number;
     name: string;
-    desc: string;
-    toppings: string;
+    username: string;
+    password: string;
     getId(): number | undefined;
 }

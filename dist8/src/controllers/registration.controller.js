@@ -16,6 +16,8 @@ const repository_1 = require("@loopback/repository");
 const user_repository_1 = require("../repositories/user.repository");
 const rest_1 = require("@loopback/rest");
 const user_1 = require("../models/user");
+// import { Charity } from "../models/charity";
+// import { CharityRepository } from "../repositories/charity.repository";
 let RegistrationController = class RegistrationController {
     constructor(userRepo) {
         this.userRepo = userRepo;

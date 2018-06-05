@@ -13,36 +13,40 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const repository_1 = require("@loopback/repository");
-const pizza_repository_1 = require("../repositories/pizza.repository");
 const rest_1 = require("@loopback/rest");
-const pizza_1 = require("../models/pizza");
-let PizzaController = class PizzaController {
-    constructor(pizzaRepo) {
-        this.pizzaRepo = pizzaRepo;
+const charity_repository_1 = require("../repositories/charity.repository");
+let CharitiesController = class CharitiesController {
+    constructor(charityRepo) {
+        this.charityRepo = charityRepo;
     }
-    async createPizza(pizza) {
-        return await this.pizzaRepo.create(pizza);
+    async getCharitiesList() {
+        return await this.charityRepo.find();
     }
-    async getAllPizzas() {
-        return await this.pizzaRepo.find();
+    async getCharityByID(id) {
+        try {
+            return await this.charityRepo.findById(id);
+        }
+        catch (_a) {
+            throw new rest_1.HttpErrors.Unauthorized('charity does not exist');
+        }
     }
 };
 __decorate([
-    rest_1.post('/pizzas'),
-    __param(0, rest_1.requestBody()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [pizza_1.Pizza]),
-    __metadata("design:returntype", Promise)
-], PizzaController.prototype, "createPizza", null);
-__decorate([
-    rest_1.get('/pizzas'),
+    rest_1.get('/charities'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], PizzaController.prototype, "getAllPizzas", null);
-PizzaController = __decorate([
-    __param(0, repository_1.repository(pizza_repository_1.PizzaRepository.name)),
-    __metadata("design:paramtypes", [pizza_repository_1.PizzaRepository])
-], PizzaController);
-exports.PizzaController = PizzaController;
-//# sourceMappingURL=pizza.controller.js.map
+], CharitiesController.prototype, "getCharitiesList", null);
+__decorate([
+    rest_1.get('/charities/{id}'),
+    __param(0, rest_1.param.path.number('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], CharitiesController.prototype, "getCharityByID", null);
+CharitiesController = __decorate([
+    __param(0, repository_1.repository(charity_repository_1.CharityRepository.name)),
+    __metadata("design:paramtypes", [charity_repository_1.CharityRepository])
+], CharitiesController);
+exports.CharitiesController = CharitiesController;
+//# sourceMappingURL=charities.controller.js.map

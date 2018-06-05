@@ -1,10 +1,11 @@
 import { repository } from "@loopback/repository";
+import { request } from "http";
 import { UserRepository } from "../repositories/user.repository";
+import { CharityRepository } from "../repositories/charity.repository";
 import { post, get, requestBody, param, HttpErrors } from "@loopback/rest";
 import { User } from "../models/user";
-import { request } from "http";
 import { Charity } from "../models/charity";
-import { CharityRepository } from "../repositories/charity.repository";
+import { Project } from "../models/project";
 
 export class CharitiesController {
 
@@ -25,5 +26,21 @@ export class CharitiesController {
         catch{
             throw new HttpErrors.Unauthorized('charity does not exist');
         }
+    }
+
+    @get('/charities/{id}/projects')
+    async getAllCharityProjects() {
+        
+    }
+
+    
+    @get('/charities/{id}/projects/{id}')
+    async getCharityProjectByID(@param.path.number('id') id: number): Promise<Project> {
+        return new Project();
+    }
+
+    @post('/charities/{id}/projects/{id}/posts')
+    async getCharityProjectPosts() {
+        
     }
 }

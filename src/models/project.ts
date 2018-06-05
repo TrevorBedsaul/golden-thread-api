@@ -1,9 +1,9 @@
 import { Entity, property, model } from '@loopback/repository';
 
 @model({
-    name: "charity"
+    name: "project"
 })
-export class Charity extends Entity {
+export class Project extends Entity {
     @property({
         type: 'number',
         id: true
@@ -20,13 +20,7 @@ export class Charity extends Entity {
         type: 'string',
         required: true
     })
-    username: string;
-
-    @property({
-        type: 'string',
-        required: true
-    })
-    password: string;
+    description: string;
 
     getId() {
         return this.id;

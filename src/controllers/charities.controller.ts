@@ -29,8 +29,13 @@ export class CharitiesController {
     }
 
     @get('/charities/{id}/projects')
-    async getAllCharityProjects() {
-        
+    async getAllCharityProjects(@param.path.number('id') id: number): Promise<number> {
+        try {
+            
+        }
+        catch{
+            throw new HttpErrors.Unauthorized('charity does not exist');
+        }
     }
 
     

@@ -13,8 +13,9 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const repository_1 = require("@loopback/repository");
-const rest_1 = require("@loopback/rest");
 const charity_repository_1 = require("../repositories/charity.repository");
+const rest_1 = require("@loopback/rest");
+const project_1 = require("../models/project");
 let CharitiesController = class CharitiesController {
     constructor(charityRepo) {
         this.charityRepo = charityRepo;
@@ -30,6 +31,13 @@ let CharitiesController = class CharitiesController {
             throw new rest_1.HttpErrors.Unauthorized('charity does not exist');
         }
     }
+    async getAllCharityProjects() {
+    }
+    async getCharityProjectByID(id) {
+        return new project_1.Project();
+    }
+    async getCharityProjectPosts() {
+    }
 };
 __decorate([
     rest_1.get('/charities'),
@@ -44,6 +52,25 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], CharitiesController.prototype, "getCharityByID", null);
+__decorate([
+    rest_1.get('/charities/{id}/projects'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], CharitiesController.prototype, "getAllCharityProjects", null);
+__decorate([
+    rest_1.get('/charities/{id}/projects/{id}'),
+    __param(0, rest_1.param.path.number('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], CharitiesController.prototype, "getCharityProjectByID", null);
+__decorate([
+    rest_1.post('/charities/{id}/projects/{id}/posts'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], CharitiesController.prototype, "getCharityProjectPosts", null);
 CharitiesController = __decorate([
     __param(0, repository_1.repository(charity_repository_1.CharityRepository.name)),
     __metadata("design:paramtypes", [charity_repository_1.CharityRepository])

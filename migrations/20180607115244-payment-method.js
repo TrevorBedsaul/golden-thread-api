@@ -15,33 +15,26 @@ exports.setup = function (options, seedLink) {
 };
 
 exports.up = function (db, callback) {
-  db.createTable('user', {
+  db.createTable('payment-method', {
     id: {
       type: 'int',
       primaryKey: true
     },
-    firstname: {
-      type: 'string',
-      length: 40
+    card_id: {
+      type: 'int',
     },
-    lastname: {
-      type: 'string',
-      length: 40
+    paypal_id: {
+      type: 'int',
     },
-    email: {
-      type: 'string',
-      length: 50
-    },
-    password: {
-      type: 'string',
-      length: 50
+    wire_id: {
+      type: 'int',
     },
   }, callback);
   return null;
 };
 
 exports.down = function (db, callback) {
-  db.dropTable('user');
+  db.dropTable('payment-method');
   return null;
 };
 

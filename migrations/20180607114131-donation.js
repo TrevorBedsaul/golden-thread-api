@@ -15,33 +15,26 @@ exports.setup = function (options, seedLink) {
 };
 
 exports.up = function (db, callback) {
-  db.createTable('user', {
+  db.createTable('donation', {
     id: {
       type: 'int',
       primaryKey: true
     },
-    firstname: {
-      type: 'string',
-      length: 40
+    amount: {
+      type: 'int'
     },
-    lastname: {
-      type: 'string',
-      length: 40
+    charity_id: {
+      type: 'int'
     },
-    email: {
-      type: 'string',
-      length: 50
-    },
-    password: {
-      type: 'string',
-      length: 50
+    user_id: {
+      type: 'int'
     },
   }, callback);
   return null;
 };
 
 exports.down = function (db, callback) {
-  db.dropTable('user');
+  db.dropTable('donation');
   return null;
 };
 

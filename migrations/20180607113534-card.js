@@ -15,33 +15,37 @@ exports.setup = function (options, seedLink) {
 };
 
 exports.up = function (db, callback) {
-  db.createTable('user', {
+  db.createTable('card', {
     id: {
       type: 'int',
       primaryKey: true
     },
-    firstname: {
-      type: 'string',
-      length: 40
-    },
-    lastname: {
-      type: 'string',
-      length: 40
-    },
-    email: {
+    name: {
       type: 'string',
       length: 50
     },
-    password: {
+    number: {
       type: 'string',
-      length: 50
+      length: 16
+    },
+    expiry_day: {
+      type: 'string',
+      length: 2
+    },
+    expiry_month: {
+      type: 'string',
+      length: 2
+    },
+    secure_code: {
+      type: 'string',
+      length: 3
     },
   }, callback);
   return null;
 };
 
 exports.down = function (db, callback) {
-  db.dropTable('user');
+  db.dropTable('card');
   return null;
 };
 

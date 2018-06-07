@@ -13,9 +13,8 @@ import { PaymentMethod } from "../models/payment-method";
 export class PaymentMethodsController {
 
     constructor(
-        @repository(DonationRepository.name) private paymentMethodRepo: PaymentMethodRepository
+        @repository(DonationRepository) private paymentMethodRepo: PaymentMethodRepository
     ) { }
-
 
     @get('/payment-methods')
     async getPaymentMethod(): Promise<Array<PaymentMethod>> {
@@ -24,6 +23,6 @@ export class PaymentMethodsController {
 
     @post('/payment-methods')
     async makePaymentMethod(@requestBody() payment_method: PaymentMethod) {
-
+        return await this.paymentMethodRepo.create(payment_method);
     }
 }

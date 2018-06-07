@@ -5,7 +5,7 @@ import { User } from "../models/user";
 export class RegistrationController {
 
     constructor(
-        @repository(UserRepository.name) private userRepo: UserRepository,
+        @repository(UserRepository) private userRepo: UserRepository,
     ) { }
 
     @post('/registration')

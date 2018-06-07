@@ -8,7 +8,7 @@ import { request } from "http";
 export class UsersController {
 
   constructor(
-    @repository(UserRepository.name) private userRepo: UserRepository
+    @repository(UserRepository) private userRepo: UserRepository
   ) { }
 
   @get('/users')

@@ -6,7 +6,7 @@ import { User } from "../models/user";
 export class LoginController {
 
   constructor(
-    @repository(UserRepository.name) private userRepo: UserRepository
+    @repository(UserRepository) private userRepo: UserRepository
   ) { }
 
   @post('/login')

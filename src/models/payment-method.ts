@@ -1,5 +1,6 @@
 import { Entity, property, model } from '@loopback/repository';
 import { Card } from '../models/card';
+import { User } from './user';
 
 @model({
     name: "payment-method"
@@ -12,9 +13,16 @@ export class PaymentMethod extends Entity {
     id?: number;
 
     @property({
-        type: 'Card',
+        type: 'number',
+        required: true
     })
-    card: Card;
+    user_id: number;
+
+
+    @property({
+        type: 'number',
+    })
+    card_id: number;
 
     // @property({
     //     type: 'PayPal',

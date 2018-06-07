@@ -53,7 +53,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], LoginController.prototype, "loginUser", null);
 LoginController = __decorate([
-    __param(0, repository_1.repository(user_repository_1.UserRepository.name)),
+    __param(0, repository_1.repository(user_repository_1.UserRepository)),
     __metadata("design:paramtypes", [user_repository_1.UserRepository])
 ], LoginController);
 exports.LoginController = LoginController;

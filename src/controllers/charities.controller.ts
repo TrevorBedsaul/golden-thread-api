@@ -1,4 +1,4 @@
-import { repository } from "@loopback/repository";
+import { repository, WhereBuilder } from "@loopback/repository";
 import { request } from "http";
 import { UserRepository } from "../repositories/user.repository";
 import { CharityRepository } from "../repositories/charity.repository";
@@ -6,11 +6,14 @@ import { post, get, requestBody, param, HttpErrors } from "@loopback/rest";
 import { User } from "../models/user";
 import { Charity } from "../models/charity";
 import { Project } from "../models/project";
+import { Post } from "../models/post";
+import { ProjectRepository } from "../repositories/project.repository";
+import { PostRepository } from "../repositories/post.repository";
 
 export class CharitiesController {
 
     constructor(
-        @repository(CharityRepository.name) private charityRepo: CharityRepository
+        @repository(CharityRepository) private charityRepo: CharityRepository, private projectRepo: ProjectRepository, private postRepo: PostRepository
     ) { }
 
     @get('/charities')
@@ -29,23 +32,18 @@ export class CharitiesController {
     }
 
     @get('/charities/{id}/projects')
-    async getAllCharityProjects(@param.path.number('id') id: number): Promise<number> {
-        try {
-            
-        }
-        catch{
-            throw new HttpErrors.Unauthorized('charity does not exist');
-        }
+    async getAllCharityProjects(@param.path.number('id') id: number): Promise<Array<Project>> {
+        return await this.projectRepo.find();
     }
 
     
     @get('/charities/{id}/projects/{id}')
     async getCharityProjectByID(@param.path.number('id') id: number): Promise<Project> {
-        return new Project();
+        return await this.projectRepo.findById(id);
     }
 
     @post('/charities/{id}/projects/{id}/posts')
-    async getCharityProjectPosts() {
-        
+    async makeCharityProjectPost(@requestBody() post: Post): Promise<Post> {
+        return await this.postRepo.create(post);
     }
 }

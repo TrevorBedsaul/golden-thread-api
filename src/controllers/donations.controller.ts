@@ -11,7 +11,7 @@ import { Donation } from "../models/donation";
 export class DonationsController {
 
     constructor(
-        @repository(DonationRepository.name) private userRepo: UserRepository, private charityRepo: CharityRepository, private donationRepo: DonationRepository
+        @repository(DonationRepository) private userRepo: UserRepository, private charityRepo: CharityRepository, private donationRepo: DonationRepository
     ) { }
 
     @post('/donations')

@@ -1,13 +1,13 @@
 import { DefaultCrudRepository } from '@loopback/repository';
 import { inject } from '@loopback/core';
 import { DataSource } from 'loopback-datasource-juggler';
-import { PaymentMethod } from '../models/payment-method';
+import { Project } from '../models/project';
 
-export class PaymentMethodRepository extends DefaultCrudRepository<
-    PaymentMethod,
-    typeof PaymentMethod.prototype.id
+export class ProjectRepository extends DefaultCrudRepository<
+    Project,
+    typeof Project.prototype.id
     > {
     constructor(@inject('datasources.db') protected datasource: DataSource) {
-        super(PaymentMethod, datasource);
+        super(Project, datasource);
     }
 }

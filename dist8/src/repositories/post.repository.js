@@ -13,27 +13,18 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const repository_1 = require("@loopback/repository");
-const user_repository_1 = require("../repositories/user.repository");
-const rest_1 = require("@loopback/rest");
-const user_1 = require("../models/user");
-let RegistrationController = class RegistrationController {
-    constructor(userRepo) {
-        this.userRepo = userRepo;
-    }
-    async createUser(user) {
-        return await this.userRepo.create(user);
+const core_1 = require("@loopback/core");
+const loopback_datasource_juggler_1 = require("loopback-datasource-juggler");
+const post_1 = require("../models/post");
+let PostRepository = class PostRepository extends repository_1.DefaultCrudRepository {
+    constructor(datasource) {
+        super(post_1.Post, datasource);
+        this.datasource = datasource;
     }
 };
-__decorate([
-    rest_1.post('/registration'),
-    __param(0, rest_1.requestBody()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [user_1.User]),
-    __metadata("design:returntype", Promise)
-], RegistrationController.prototype, "createUser", null);
-RegistrationController = __decorate([
-    __param(0, repository_1.repository(user_repository_1.UserRepository)),
-    __metadata("design:paramtypes", [user_repository_1.UserRepository])
-], RegistrationController);
-exports.RegistrationController = RegistrationController;
-//# sourceMappingURL=registration.controller.js.map
+PostRepository = __decorate([
+    __param(0, core_1.inject('datasources.db')),
+    __metadata("design:paramtypes", [loopback_datasource_juggler_1.DataSource])
+], PostRepository);
+exports.PostRepository = PostRepository;
+//# sourceMappingURL=post.repository.js.map

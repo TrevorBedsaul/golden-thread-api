@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const repository_1 = require("@loopback/repository");
 const charity_repository_1 = require("../repositories/charity.repository");
 const rest_1 = require("@loopback/rest");
-const post_1 = require("../models/post");
 const project_repository_1 = require("../repositories/project.repository");
 const post_repository_1 = require("../repositories/post.repository");
 let CharitiesController = class CharitiesController {
@@ -38,12 +37,6 @@ let CharitiesController = class CharitiesController {
     async getAllCharityProjects(id) {
         return await this.projectRepo.find();
     }
-    async getCharityProjectByID(id) {
-        return await this.projectRepo.findById(id);
-    }
-    async makeCharityProjectPost(post) {
-        return await this.postRepo.create(post);
-    }
 };
 __decorate([
     rest_1.get('/charities'),
@@ -65,23 +58,13 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], CharitiesController.prototype, "getAllCharityProjects", null);
-__decorate([
-    rest_1.get('/charities/{id}/projects/{id}'),
-    __param(0, rest_1.param.path.number('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", Promise)
-], CharitiesController.prototype, "getCharityProjectByID", null);
-__decorate([
-    rest_1.post('/charities/{id}/projects/{id}/posts'),
-    __param(0, rest_1.requestBody()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [post_1.Post]),
-    __metadata("design:returntype", Promise)
-], CharitiesController.prototype, "makeCharityProjectPost", null);
 CharitiesController = __decorate([
     __param(0, repository_1.repository(charity_repository_1.CharityRepository)),
-    __metadata("design:paramtypes", [charity_repository_1.CharityRepository, project_repository_1.ProjectRepository, post_repository_1.PostRepository])
+    __param(1, repository_1.repository(project_repository_1.ProjectRepository)),
+    __param(2, repository_1.repository(post_repository_1.PostRepository)),
+    __metadata("design:paramtypes", [charity_repository_1.CharityRepository,
+        project_repository_1.ProjectRepository,
+        post_repository_1.PostRepository])
 ], CharitiesController);
 exports.CharitiesController = CharitiesController;
 //# sourceMappingURL=charities.controller.js.map

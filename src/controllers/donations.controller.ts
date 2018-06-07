@@ -16,11 +16,11 @@ export class DonationsController {
 
     @post('/donations')
     async makeDonation(@requestBody() donation: Donation) {
-        if (!(await this.userRepo.count({ id: donation.user.getId() }))) {
+        if (!(await this.userRepo.count({ id: donation.user_id }))) {
             throw new HttpErrors.Unauthorized('user does not exist');
         }
 
-        if (!(await this.charityRepo.count({ id: donation.charity.getId() }))) {
+        if (!(await this.charityRepo.count({ id: donation.charity_id }))) {
             throw new HttpErrors.Unauthorized('charity does not exist');
         }
 
